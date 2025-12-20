@@ -529,7 +529,10 @@ section {
 
 .about-image img {
   width: 100%;
+  max-width: 280px;
+  height: 100%;
   border-radius: var(--radius-sm);
+  margin-left: 40px;
 }
 
 .about-text h2 {
