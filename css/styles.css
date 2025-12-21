@@ -693,11 +693,29 @@ section {
   margin-bottom: 4rem;
 }
 
+.portfolio-section h4 {
+  font-size: 24px;
+}
+
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
+}
+
+.portfolio-grid-cranberries {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 3rem 0;
+}
+
+.portfolio-grid-vibes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 3rem 0;
 }
 
 .portfolio-item {
@@ -707,13 +725,33 @@ section {
   box-shadow: var(--card-shadow);
 }
 
+.portfolio-item-cranberries img {
+  width: 100%;
+  height: 100%;
+  max-width: 600px;
+  object-fit: contain;
+  box-shadow: solid 1px #bbb;
+  border-radius: 0;
+  margin-top: -2rem;
+}
+
+.portfolio-item-vibes img {
+  width: 100%;
+  height: 100%;
+  max-width: 600px;
+  object-fit: contain;
+  box-shadow: solid 1px #bbb;
+  border-radius: 0;
+  margin-top: -2rem;
+}
+
 .portfolio-item iframe {
   width: 100%;
   height: 315px;
 }
 
 .portfolio-item:hover img {
-  transform: scale(1.1);
+  transform: scale(1);
 }
 
 /* Back Button */
