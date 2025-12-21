@@ -704,6 +704,13 @@ section {
   margin-top: 2rem;
 }
 
+.portfolio-grid-ltn {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 3rem 0;
+}
+
 .portfolio-grid-cranberries {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -723,6 +730,16 @@ section {
   overflow: hidden;
   border-radius: var(--radius-sm);
   box-shadow: var(--card-shadow);
+}
+
+.portfolio-item-ltn img {
+  width: 100%;
+  height: 100%;
+  max-width: 600px;
+  object-fit: contain;
+  box-shadow: solid 1px #bbb;
+  border-radius: 0;
+  margin-top: -2rem;
 }
 
 .portfolio-item-cranberries img {
