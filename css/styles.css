@@ -386,6 +386,13 @@ nav {
   padding: 3rem 0;
 }
 
+.single-row-grid-portfolio {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 3rem 0;
+}
+
 .single-row-grid-services {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
@@ -458,6 +465,11 @@ nav {
 }
 
 .grid-item-content {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.grid-item-content-porfolio a {
   padding: 1.5rem;
   text-align: center;
 }
