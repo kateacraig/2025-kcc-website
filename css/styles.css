@@ -394,6 +394,34 @@ nav {
   justify-items: center;
 }
 
+.single-row-grid-podcast {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  gap: 2rem;
+  padding: 3rem 0;
+  justify-items: center;
+}
+
+.grid-item-podcast {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.grid-item-podcast img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.grid-item-podcast:hover {
+  transform: scale(1.1);
+}
+
 .grid-item {
   background: var(--white);
   border-radius: var(--radius-sm);
