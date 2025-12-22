@@ -758,6 +758,7 @@ section {
   overflow: hidden;
   border-radius: var(--radius-sm);
   box-shadow: var(--card-shadow);
+  background-color: black;
 }
 
 .portfolio-item-opeds img {
@@ -773,6 +774,7 @@ section {
   text-align: center;
   font-size: 20px;
   margin-bottom: 20px;
+  color: white;
 }
 
 .portfolio-item-books img {
