@@ -704,6 +704,20 @@ section {
   margin-top: 2rem;
 }
 
+.portfolio-grid-books {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.portfolio-grid-opeds {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
 .portfolio-grid-ltn {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -730,6 +744,44 @@ section {
   overflow: hidden;
   border-radius: var(--radius-sm);
   box-shadow: var(--card-shadow);
+}
+
+.portfolio-item-books {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--card-shadow);
+}
+
+.portfolio-item-opeds {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--card-shadow);
+}
+
+.portfolio-item-opeds img {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+  box-shadow: solid 1px #bbb;
+  border-radius: 0;
+  margin-top: -2rem;
+}
+
+.portfolio-item-opeds h4 {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.portfolio-item-books img {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+  box-shadow: solid 1px #bbb;
+  border-radius: 0;
+  margin-top: -2rem;
 }
 
 .portfolio-item-ltn img {
