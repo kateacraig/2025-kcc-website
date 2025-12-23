@@ -1,7 +1,9 @@
 // Kate Craig Consulting - Main JavaScript
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Hamburger Menu Toggle
+  // ==========================================
+  // NAVIGATION & HAMBURGER MENU
+  // ==========================================
   const hamburger = document.querySelector(".hamburger");
   const navMenu = document.querySelector(".nav-menu");
   const dropdowns = document.querySelectorAll(".dropdown");
@@ -34,7 +36,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Smooth scrolling for anchor links
+  // ==========================================
+  // SMOOTH SCROLLING
+  // ==========================================
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
@@ -48,7 +52,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Form validation
+  // ==========================================
+  // FORM VALIDATION
+  // ==========================================
   const forms = document.querySelectorAll("form");
   forms.forEach((form) => {
     form.addEventListener("submit", function (e) {
@@ -76,30 +82,115 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Intersection Observer for fade-in animations
-  const observerOptions = {
+  // ==========================================
+  // GENERAL ANIMATIONS (All pages)
+  // ==========================================
+  const generalObserverOptions = {
     threshold: 0.1,
     rootMargin: "0px 0px -50px 0px",
   };
 
-  const observer = new IntersectionObserver(function (entries) {
+  const generalObserver = new IntersectionObserver(function (entries) {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("fade-in");
-        observer.unobserve(entry.target);
+        generalObserver.unobserve(entry.target);
       }
     });
-  }, observerOptions);
+  }, generalObserverOptions);
 
-  // Observe elements for animation
+  // Observe elements for animation on all pages
   const animateElements = document.querySelectorAll(
     ".service-card, .testimonial, .grid-item, .portfolio-item"
   );
   animateElements.forEach((element) => {
-    observer.observe(element);
+    generalObserver.observe(element);
   });
 
-  // Add active state to current page in navigation
+  // ==========================================
+  // NEWSLETTER SIGNUP PAGE SPECIFIC
+  // ==========================================
+  const iframe = document.getElementById("newsletter-iframe");
+
+  if (iframe) {
+    // Set initial iframe height
+    setIframeHeight();
+
+    // Listen for window resize to adjust iframe
+    let iframeResizeTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(iframeResizeTimer);
+      iframeResizeTimer = setTimeout(function () {
+        setIframeHeight();
+      }, 250);
+    });
+
+    // Listen for messages from the iframe (if Constant Contact sends them)
+    window.addEventListener("message", function (event) {
+      // Check if message is from Constant Contact
+      if (event.origin.includes("constantcontactpages.com")) {
+        // If Constant Contact sends height information
+        if (event.data && event.data.height) {
+          iframe.style.height = event.data.height + "px";
+        }
+
+        // If form is successfully submitted
+        if (event.data && event.data.formSubmitted) {
+          handleFormSuccess();
+        }
+      }
+    });
+
+    // Add loading indicator
+    iframe.addEventListener("load", function () {
+      const embedContainer = iframe.closest(".constant-contact-embed");
+      if (embedContainer) {
+        embedContainer.classList.add("loaded");
+      }
+    });
+  }
+
+  // Smooth scroll to form when clicking benefits (newsletter page only)
+  const benefitItems = document.querySelectorAll(".benefit-item");
+  if (benefitItems.length > 0) {
+    benefitItems.forEach(function (item) {
+      item.addEventListener("click", function () {
+        const formContainer = document.querySelector(".form-container");
+        if (formContainer) {
+          formContainer.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      });
+    });
+
+    // Animate benefit items on scroll
+    const benefitObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, index) {
+        if (entry.isIntersecting) {
+          // Stagger the animation
+          setTimeout(function () {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }, index * 100);
+          benefitObserver.unobserve(entry.target);
+        }
+      });
+    }, generalObserverOptions); // Reuse the same options
+
+    // Set initial state and observe
+    benefitItems.forEach(function (item) {
+      item.style.opacity = "0";
+      item.style.transform = "translateY(20px)";
+      item.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+      benefitObserver.observe(item);
+    });
+  }
+
+  // ==========================================
+  // ACTIVE PAGE STATE
+  // ==========================================
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
   const navLinks = document.querySelectorAll(".nav-menu a");
 
@@ -111,12 +202,92 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Resize handler for responsive adjustments
-let resizeTimer;
+// ==========================================
+// GLOBAL FUNCTIONS
+// ==========================================
+
+// Function to set iframe height based on viewport (Newsletter page)
+function setIframeHeight() {
+  const iframe = document.getElementById("newsletter-iframe");
+  if (!iframe) return;
+
+  const viewportWidth = window.innerWidth;
+  let height;
+
+  // Adjust height based on screen size
+  if (viewportWidth <= 460) {
+    height = 600; // Mobile
+  } else if (viewportWidth <= 760) {
+    height = 550; // Tablet
+  } else {
+    height = 500; // Desktop
+  }
+
+  iframe.style.height = height + "px";
+}
+
+// Handle successful form submission (Newsletter page)
+function handleFormSuccess() {
+  const successMessage = document.createElement("div");
+  successMessage.className = "success-message";
+  successMessage.innerHTML = `
+        <div style="
+            background: linear-gradient(135deg, #38b6ff, #1d57a4);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        ">
+            <i class="fas fa-check-circle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+            <h2 style="color: white; margin-bottom: 1rem;">Welcome to Our Newsletter!</h2>
+            <p style="font-size: 1.1rem; margin: 0;">
+                Thank you for subscribing. Check your email to confirm your subscription 
+                and start receiving valuable digital marketing insights.
+            </p>
+        </div>
+    `;
+
+  // Insert success message after form
+  const formContainer = document.querySelector(".form-container");
+  if (formContainer) {
+    formContainer.parentNode.insertBefore(
+      successMessage,
+      formContainer.nextSibling
+    );
+
+    // Scroll to success message
+    setTimeout(function () {
+      successMessage.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }, 100);
+  }
+
+  // Optional: Track form submission with analytics
+  if (typeof gtag !== "undefined") {
+    gtag("event", "newsletter_signup", {
+      event_category: "engagement",
+      event_label: "Newsletter Subscription",
+    });
+  }
+}
+
+// ==========================================
+// RESIZE HANDLER (All pages except newsletter)
+// ==========================================
+// Note: Newsletter page has its own resize handler for iframe adjustment
+let pageResizeTimer;
 window.addEventListener("resize", function () {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(function () {
-    // Reload page if crossing tablet breakpoint
-    location.reload();
-  }, 250);
+  // Only reload if NOT on newsletter page
+  const hasIframe = document.getElementById("newsletter-iframe");
+  if (!hasIframe) {
+    clearTimeout(pageResizeTimer);
+    pageResizeTimer = setTimeout(function () {
+      location.reload();
+    }, 250);
+  }
 });
