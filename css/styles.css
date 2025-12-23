@@ -711,6 +711,13 @@ section {
   margin-top: 2rem;
 }
 
+.portfolio-grid-email {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
 .portfolio-grid-books {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -774,6 +781,14 @@ section {
   box-shadow: var(--card-shadow);
 }
 
+.portfolio-item-email {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+
+  padding: 5px;
+}
+
 .portfolio-item-pdfs {
   position: relative;
   overflow: hidden;
@@ -787,7 +802,6 @@ section {
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-sm);
-
   padding-top: 30px;
 }
 
@@ -827,6 +841,45 @@ section {
   object-fit: contain;
   box-shadow: solid 1px #bbb;
   border-radius: 0;
+}
+
+.portfolio-item-email img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 350px;
+  height: 100%;
+  object-fit: cover;
+  box-shadow: solid 1px #bbb;
+  border-radius: 0;
+}
+
+.wide-email-image img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 350px;
+  max-width: 800px;
+  object-fit: cover;
+  box-shadow: solid 1px #bbb;
+  border-radius: 0;
+}
+
+.wide-email-image-2 img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 600px;
+  width: 100%;
+  max-width: 800px;
+  object-fit: cover;
+  box-shadow: solid 1px #bbb;
+  border-radius: 0;
+}
+
+.portfolio-item-email:hover img {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .portfolio-item-graphics {
@@ -894,6 +947,10 @@ section {
   font-size: 20px;
   margin-top: 20px;
   color: white;
+}
+
+.email-marketing p {
+  text-align: center;
 }
 
 .portfolio-item-books img {
