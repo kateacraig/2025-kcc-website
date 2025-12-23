@@ -386,6 +386,13 @@ nav {
   padding: 3rem 0;
 }
 
+.single-row-grid-video {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 3rem 0;
+}
+
 .single-row-grid-portfolio {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
