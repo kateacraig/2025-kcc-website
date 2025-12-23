@@ -718,6 +718,13 @@ section {
   margin-top: 2rem;
 }
 
+.portfolio-grid-graphics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
 .portfolio-grid-pdfs {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -758,15 +765,6 @@ section {
   overflow: hidden;
   border-radius: var(--radius-sm);
   box-shadow: var(--card-shadow);
-}
-
-.portfolio-item-pdfs {
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--card-shadow);
-  background-color: black;
-  padding: 5px;
 }
 
 .portfolio-item-pdfs {
@@ -822,6 +820,29 @@ section {
   object-fit: contain;
   box-shadow: solid 1px #bbb;
   border-radius: 0;
+}
+
+.portfolio-item-graphics {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  padding: 5px;
+}
+
+.portfolio-item-graphics img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 275px;
+  object-fit: contain;
+  box-shadow: solid 1px #bbb;
+  border-radius: 0;
+  padding: 5px;
+}
+
+.portfolio-item-graphics:hover img {
+  transform: scale(1.1);
 }
 
 .portfolio-item-opeds:hover {
