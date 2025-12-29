@@ -1013,6 +1013,11 @@ section {
 
 .portfolio-item iframe {
   width: 100%;
+  height: 500px;
+}
+
+.portfolio-item-socials iframe {
+  width: 100%;
   height: 315px;
 }
 
