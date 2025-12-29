@@ -785,7 +785,6 @@ section {
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-sm);
-  box-shadow: var(--card-shadow);
 }
 
 .portfolio-item-email {
