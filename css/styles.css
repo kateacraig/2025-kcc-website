@@ -807,7 +807,6 @@ section {
 .portfolio-item-books {
   position: relative;
   overflow: hidden;
-  border-radius: var(--radius-sm);
   padding-top: 30px;
 }
 
