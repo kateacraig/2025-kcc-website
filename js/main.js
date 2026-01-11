@@ -277,17 +277,77 @@ function handleFormSuccess() {
 }
 
 // ==========================================
-// RESIZE HANDLER (All pages except newsletter)
+// SMART RESIZE HANDLER (FIXED FOR MOBILE)
 // ==========================================
-// Note: Newsletter page has its own resize handler for iframe adjustment
+// This prevents constant reloading on mobile when scrolling
+// Only reloads when window WIDTH changes (orientation or actual resize)
+// NOT when height changes (mobile browser UI showing/hiding)
+
 let pageResizeTimer;
+let lastWidth = window.innerWidth;
+
 window.addEventListener("resize", function () {
-  // Only reload if NOT on newsletter page
+  // Don't do anything on newsletter page (it has its own handler)
   const hasIframe = document.getElementById("newsletter-iframe");
-  if (!hasIframe) {
+  if (hasIframe) return;
+
+  // Get current width
+  const currentWidth = window.innerWidth;
+
+  // Only reload if WIDTH changed (not height)
+  // This prevents reload when mobile address bar hides/shows
+  if (currentWidth !== lastWidth) {
     clearTimeout(pageResizeTimer);
     pageResizeTimer = setTimeout(function () {
-      location.reload();
-    }, 250);
+      // Double-check width actually changed before reloading
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        location.reload();
+      }
+    }, 500); // Increased delay to 500ms for better stability
   }
 });
+
+// ==========================================
+// SMOOTH SCROLL FIX FOR MOBILE
+// ==========================================
+// Ensure smooth scrolling works properly on all devices
+(function () {
+  // Check if device supports smooth scrolling
+  if ("scrollBehavior" in document.documentElement.style) {
+    return; // Native smooth scroll is supported
+  }
+
+  // Polyfill for smooth scroll on older browsers
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        const targetPosition =
+          target.getBoundingClientRect().top + window.pageYOffset;
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        const duration = 1000;
+        let start = null;
+
+        function animation(currentTime) {
+          if (start === null) start = currentTime;
+          const timeElapsed = currentTime - start;
+          const run = ease(timeElapsed, startPosition, distance, duration);
+          window.scrollTo(0, run);
+          if (timeElapsed < duration) requestAnimationFrame(animation);
+        }
+
+        function ease(t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) return (c / 2) * t * t + b;
+          t--;
+          return (-c / 2) * (t * (t - 2) - 1) + b;
+        }
+
+        requestAnimationFrame(animation);
+      }
+    });
+  });
+})();
