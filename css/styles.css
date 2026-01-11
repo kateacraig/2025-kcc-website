@@ -822,7 +822,6 @@ section {
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-sm);
-
   padding: 5px;
 }
 
@@ -838,7 +837,11 @@ section {
 .portfolio-item-books {
   position: relative;
   overflow: hidden;
-  padding-top: 30px;
+}
+
+.portfolio-item-beta {
+  position: relative;
+  overflow: hidden;
 }
 
 .portfolio-item-opeds {
@@ -1412,6 +1415,12 @@ footer {
   .single-row-grid-portfolio {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
+  }
+
+  .portfolio-item-books,
+  .portfolio-item-beta {
+    display: flex;
+    justify-content: center;
   }
 
   .single-row-grid-podcast {
